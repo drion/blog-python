@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     
     # Apps
     'authentication',
+    'blog',
 ]
 
 MIDDLEWARE = [
