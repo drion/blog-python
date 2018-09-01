@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 
@@ -42,3 +44,8 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class RetrieveUserAPI(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

@@ -20,7 +20,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', )
+        fields = ('id', 'username', )
 
 
 class LoginUserSerializer(serializers.Serializer):
