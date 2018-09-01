@@ -17,3 +17,10 @@ class RetrievePostAPI(generics.RetrieveAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class RetrieveUserPosts(generics.RetrieveAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(owner=self.kwargs.get('pk'))
