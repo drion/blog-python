@@ -35,7 +35,7 @@ class DestroyPostAPI(generics.DestroyAPIView):
         return Post.objects.filter(owner=self.request.user)
 
 
-class RetrieveUserPosts(generics.RetrieveAPIView):
+class ListUserPosts(generics.ListAPIView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = PostSerializer
 

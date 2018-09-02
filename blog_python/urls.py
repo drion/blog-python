@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blog.views import RetrieveUserPosts
+from blog.views import ListUserPosts
 from authentication.views import RetrieveUserAPI
 
 urlpatterns = [
     path('api/auth/', include('authentication.urls')),
     path('api/posts/', include('blog.urls')),
     path('api/users/<int:pk>/', RetrieveUserAPI.as_view()),
-    path('api/users/<int:pk>/posts/', RetrieveUserPosts.as_view()),
+    path('api/users/<int:pk>/posts/', ListUserPosts.as_view()),
     path('admin/', admin.site.urls),
 ]
