@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Comment
+from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
 
 
@@ -41,3 +41,14 @@ class RetrieveUserPosts(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Post.objects.filter(owner=self.kwargs.get('pk'))
+
+
+class ListCommentsAPI(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        return Comment.objects.filter(post=self.kwargs.get('post'))
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user, post=Post.objects.get(pk=self.request.data.get('post')))
